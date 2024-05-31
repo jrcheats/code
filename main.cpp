@@ -31,23 +31,13 @@ CPUINFO deserializeCPUINFO(const std::string& str) {
 	return cpuinfo;
 }
 
-void print_cpu_info(const CPUINFO& cpuInfo) {
-	for (int i = 0; i < 7; ++i) {
-		std::cout << "CPUID(" << i << "):" << std::endl;
-		std::cout << "  EAX: " << std::hex << cpuInfo.Register[i][0] << std::endl;
-		std::cout << "  EBX: " << std::hex << cpuInfo.Register[i][1] << std::endl;
-		std::cout << "  ECX: " << std::hex << cpuInfo.Register[i][2] << std::endl;
-		std::cout << "  EDX: " << std::hex << cpuInfo.Register[i][3] << std::endl;
-	}
-}
+
 
 int main() {
 	CPUINFO cpuInfo;
 	for (size_t i = 0; i < 7; i++) {
 		__cpuid(cpuInfo.Register[i], static_cast<int>(i));
 	}
-	
-	//print_cpu_info(cpuInfo);
 
 	std::string serialized = serializeCPUINFO(cpuInfo);
 	std::cout <<  serialized << std::endl;
