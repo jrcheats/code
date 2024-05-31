@@ -19,20 +19,6 @@ std::string serializeCPUINFO(const CPUINFO& cpuinfo) {
 	return oss.str();
 }
 
-// 从十六进制字符串解析为结构体
-CPUINFO deserializeCPUINFO(const std::string& str) {
-	CPUINFO cpuinfo;
-	for (int i = 0; i < 7; ++i) {
-		for (int j = 0; j < 4; ++j) {
-			std::string hexValue = str.substr((i * 4 + j) * 8, 8);
-			cpuinfo.Register[i][j] = static_cast<int>(std::stoul(hexValue, nullptr, 16));
-		}
-	}
-	return cpuinfo;
-}
-
-
-
 int main() {
 	CPUINFO cpuInfo;
 	for (size_t i = 0; i < 7; i++) {
